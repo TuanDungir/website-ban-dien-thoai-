@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quản trị trực tuyến | thegioidienthoai</title>
+<link rel="stylesheet" href="admin-pro.css">
+</head>
+<body>
+
+<!-- ================= ĐĂNG NHẬP ================= -->
+<div class="login-wrap" id="loginScreen">
+  <form class="login-card" id="loginForm">
+    <h1>Quản trị thegioidienthoai</h1>
+    <p class="sub">Đăng nhập bằng email công vụ hoặc mã nhân viên.</p>
+    <div class="field">
+      <label for="lgEmail">Email / Mã nhân viên</label>
+      <input id="lgEmail" value="ADMIN01" autocomplete="username">
+    </div>
+    <div class="field">
+      <label for="lgPw">Mật khẩu</label>
+      <input id="lgPw" type="password" value="Admin@123456" autocomplete="current-password">
+    </div>
+    <div class="err" id="lgErr"></div>
+    <button class="btn" style="width:100%" type="submit" id="lgBtn">Đăng nhập</button>
+    <div class="hint">
+      <b>Tài khoản demo</b><br>
+      <code>ADMIN01</code> — Super Admin (toàn quyền)<br>
+      <code>NV0002</code> — Quản lý sản phẩm &amp; kho<br>
+      <code>NV0003</code> — Quản lý đơn hàng<br>
+      Mật khẩu chung: <code>Admin@123456</code>
+    </div>
+  </form>
+</div>
+
+<!-- ================= BẢNG QUẢN TRỊ ================= -->
+<div class="adm" id="app" style="display:none">
+  <aside class="side">
+    <div class="brand">thegioidienthoai<small>BẢNG QUẢN TRỊ</small></div>
+    <a data-tab="dashboard">▦ <span>Tổng quan</span></a>
+    <a data-tab="orders">🧾 <span>Đơn hàng</span><span class="chip" id="navOrders" style="display:none"></span></a>
+    <a data-tab="products">📦 <span>Sản phẩm</span></a>
+    <a data-tab="customers">👤 <span>Khách hàng</span></a>
+    <div class="who" id="whoBox"></div>
+  </aside>
+  <main class="main" id="main"></main>
+</div>
+
+<!-- ================= MODAL ================= -->
+<div class="overlay" id="overlay">
+  <div class="dialog">
+    <h3 id="dlgTitle">Tiêu đề<button class="x" onclick="closeDialog()">×</button></h3>
+    <div class="content" id="dlgBody"></div>
+    <div class="foot" id="dlgFoot"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="admin-pro.js"></script>
+</body>
+</html>

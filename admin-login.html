@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đăng nhập quản trị | thegioidienthoai</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="admin-login">
+ <div class="al-card" id="loginCard">
+  <div class="al-brand"><span class="mark">T</span><div><b>thegioidienthoai</b><div style="font-size:11.5px;color:#667085">Hệ thống quản trị nội bộ</div></div></div>
+  <p class="al-sub">Đăng nhập bằng Email công vụ hoặc Mã nhân viên (Staff ID).</p>
+
+  <div id="stepLogin">
+   <label for="adLogin">Email công vụ / Mã nhân viên</label>
+   <input id="adLogin" placeholder="admin@thegioidienthoai.com hoặc ADMIN01" autocomplete="username">
+   <label for="adPw">Mật khẩu</label>
+   <input id="adPw" type="password" placeholder="Tối thiểu 12 ký tự" autocomplete="current-password">
+   <div class="al-row"><span id="lockInfo"></span><span id="pwAge"></span></div>
+   <div class="al-err" id="loginErr"></div>
+   <button class="al-btn" id="loginBtn" onclick="adSubmitLogin()">Đăng nhập</button>
+   <p class="al-note">Bắt buộc xác thực 2 lớp (2FA) với mọi tài khoản quản trị. Phiên làm việc tự động đăng xuất sau <span id="timeoutMin">20</span> phút không thao tác.</p>
+  </div>
+
+  <div id="step2fa" style="display:none">
+   <div class="al-ok" id="okMsg" style="display:block">Mật khẩu đúng. Nhập mã 6 số từ ứng dụng Authenticator.</div>
+   <label for="otp">Mã xác thực 2 lớp</label>
+   <input id="otp" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code">
+   <div class="al-err" id="otpErr"></div>
+   <div class="al-hint" style="text-align:center">
+    Mã OTP demo của bạn: <b id="otpDemo" style="font-size:22px;letter-spacing:6px;color:#111">------</b>
+    <div style="margin-top:6px">Trong hệ thống thật mã này do Google Authenticator / Authy sinh ra.</div>
+   </div>
+   <button class="al-btn" onclick="adSubmitOtp()">Xác thực</button>
+   <button class="al-btn" style="background:#eef2f7;color:#475467;margin-top:8px" onclick="adBackToLogin()">Quay lại</button>
+  </div>
+
+  <div class="al-hint" id="demoHint">
+   <b>Tài khoản demo</b><br>
+   Super Admin: <code>ADMIN01</code> / <code>Admin@12345678</code><br>
+   Kho hàng: <code>NV0002</code> / <code>Kho@123456789</code><br>
+   Đơn hàng: <code>NV0003</code> / <code>Donhang@12345</code><br>
+   CSKH (bị khóa): <code>NV0004</code> / <code>Cskh@123456789</code>
+  </div>
+  <p class="al-note" style="text-align:center"><a href="index.html" style="color:#1685ff;font-weight:700">← Về trang chủ</a></p>
+ </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="data.js"></script>
+<script src="auth.js"></script>
+<script src="admin-data.js"></script>
+<script>
+adSeed();
+const settings = adSettings();
+document.getElementById('timeoutMin').textContent = settings.sessionTimeoutMin;
+
+function adErr(id, msg) {
+  const e = document.getElementById(id);
+  e.textContent = msg;
+  e.style.display = msg ? 'block' : 'none';
+}
+
+/* Bước 1: kiểm tra tài khoản + mật khẩu, áp dụng khóa sau 5 lần sai */
+let pendingAdmin = null;
+function adSubmitLogin() {
+  const login = document.getElementById('adLogin').value.trim();
+  const pw = document.getElementById('adPw').value;
+  adErr('loginErr', '');
+  if (!login || !pw) return adErr('loginErr', 'Vui lòng nhập đầy đủ tài khoản và mật khẩu.');
+
+  const acc = adFindAccount(login);
+  if (!acc) return adErr('loginErr', 'Tài khoản không tồn tại trong hệ thống.');
+
+  if (acc.status === 'Locked') return adErr('loginErr', 'Tài khoản đang bị tạm khóa. Liên hệ Super Admin.');
+  if (acc.status === 'Inactive') return adErr('loginErr', 'Tài khoản đã ngừng hoạt động.');
+
+  const attempts = adRead(ADMIN_ATTEMPTS_KEY, {});
+  const rec = attempts[acc.id] || { fails: 0, until: 0 };
+  if (rec.until > Date.now()) {
+    return adErr('loginErr', 'Sai mật khẩu quá 5 lần. Vui lòng thử lại sau ' +
+      Math.ceil((rec.until - Date.now()) / 60000) + ' phút.');
+  }
+
+  if (acc.password !== adHash(pw, acc.salt)) {
+    rec.fails = (rec.fails || 0) + 1;
+    if (rec.fails >= 5) {
+      rec.until = Date.now() + 5 * 60000;
+      rec.fails = 0;
+      adErr('loginErr', 'Sai mật khẩu 5 lần — tài khoản tạm khóa 5 phút.');
+    } else {
+      adErr('loginErr', 'Mật khẩu không đúng. Còn ' + (5 - rec.fails) + ' lần thử.');
+    }
+    attempts[acc.id] = rec;
+    adWrite(ADMIN_ATTEMPTS_KEY, attempts);
+    return;
+  }
+
+  attempts[acc.id] = { fails: 0, until: 0 };
+  adWrite(ADMIN_ATTEMPTS_KEY, attempts);
+  pendingAdmin = acc;
+  window.demoOtp = String(Math.floor(100000 + Math.random() * 900000));
+  document.getElementById('otpDemo').textContent = window.demoOtp;
+  showToast('Mã OTP demo: ' + window.demoOtp);
+  document.getElementById('stepLogin').style.display = 'none';
+  document.getElementById('step2fa').style.display = 'block';
+  document.getElementById('demoHint').style.display = 'none';
+  document.getElementById('otp').value = '';
+  document.getElementById('otp').focus();
+}
+
+function adSubmitOtp() {
+  adErr('otpErr', '');
+  const code = document.getElementById('otp').value.trim();
+  if (!/^\d{6}$/.test(code)) return adErr('otpErr', 'Mã xác thực gồm 6 chữ số.');
+  if (code !== window.demoOtp) return adErr('otpErr', 'Mã xác thực không đúng hoặc đã hết hạn.');
+  const list = adAccounts();
+  const acc = list.find(a => a.id === pendingAdmin.id);
+  acc.lastLoginAt = new Date().toISOString();
+  acc.lastIp = '203.113.10.11';
+  adSaveAccounts(list);
+  adWrite(ADMIN_SESSION_KEY, acc.id);
+  adWrite('tgdd_admin_last_active', Date.now());
+  adLog('Đăng nhập', 'Đăng nhập thành công bằng 2FA');
+  location.href = 'admin.html';
+}
+
+function adBackToLogin() {
+  pendingAdmin = null;
+  document.getElementById('step2fa').style.display = 'none';
+  document.getElementById('stepLogin').style.display = 'block';
+  document.getElementById('demoHint').style.display = 'block';
+  document.getElementById('adPw').value = '';
+  adErr('otpErr', '');
+}
+
+document.getElementById('adPw').addEventListener('keydown', e => { if (e.key === 'Enter') adSubmitLogin(); });
+document.getElementById('adLogin').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('adPw').focus(); });
+document.getElementById('otp').addEventListener('keydown', e => { if (e.key === 'Enter') adSubmitOtp(); });
+</script>
+</body>
+</html>

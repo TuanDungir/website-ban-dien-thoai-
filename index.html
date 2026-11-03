@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>thegioidienthoai | Điện thoại chính hãng</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-promo">SIÊU ƯU ĐÃI ĐIỆN THOẠI — THU CŨ ĐỔI MỚI, TIẾT KIỆM ĐẾN HÀNG TRIỆU ĐỒNG</div>
+<header>
+ <div class="head">
+  <a class="logo" href="#" aria-label="thegioidienthoai.com">
+   <svg class="logo-mark" viewBox="0 0 100 100" role="img" aria-hidden="true">
+    <circle cx="50" cy="50" r="48" fill="#111"/>
+    <g fill="#ffd400">
+     <circle cx="34" cy="24" r="7"/>
+     <rect x="56" y="20" width="12" height="12" rx="1.5" transform="rotate(45 62 26)"/>
+     <rect x="24" y="40" width="14" height="14" rx="2"/>
+     <rect x="42" y="40" width="14" height="14" rx="2"/>
+     <rect x="60" y="40" width="14" height="14" rx="2"/>
+     <rect x="33" y="58" width="14" height="14" rx="2"/>
+     <rect x="51" y="58" width="14" height="14" rx="2"/>
+     <rect x="42" y="76" width="14" height="14" rx="2"/>
+    </g>
+   </svg>
+   <span class="logo-text">thegioidienthoai<span class="logo-tld">.com</span></span>
+  </a>
+  <form class="search" id="searchForm"><span>⌕</span>&nbsp;<input id="searchInput" placeholder="Bạn tìm điện thoại nào?" aria-label="Tìm kiếm sản phẩm"></form>
+  <button class="headbtn" id="authBtn" onclick="openModal('authModal')">♙ Đăng nhập</button>
+  <button class="headbtn" onclick="showToast('Voucher mẫu: WELCOME50 — áp dụng khi thanh toán.')">🎟 Voucher</button>
+  <button class="headbtn" onclick="location.href='checkout.html?step=cart'">🛒 Giỏ hàng <span data-cart-count>(0)</span></button>
+  <span class="location">⌖ Hà Nội ▾</span>
+ </div>
+ <nav class="nav"><a href="#products">Điện thoại</a><a href="#brands">Hãng điện thoại</a><a href="#tradein">Thu cũ, đổi mới</a><a href="#promotions">Khuyến mãi</a><a href="#products">Điện thoại bán chạy</a><a href="#footer">Hỗ trợ</a></nav>
+</header>
+<main>
+ <div class="crumb">Trang chủ › Điện thoại di động</div>
+ <section class="banners" id="promotions">
+  <div class="banner trade" id="tradein"><div><h2>Thu cũ đổi mới</h2><p>Lên đời điện thoại mới — định giá máy cũ minh bạch.</p><button class="cta" onclick="openModal('tradeModal')">Định giá điện thoại cũ</button></div><img alt="Điện thoại minh họa" src="https://placehold.co/260x180/fce3d3/8b341d?text=TRADE-IN"></div>
+  <div class="banner"><div><h2>Ưu đãi điện thoại</h2><p>Quà tặng hấp dẫn và hỗ trợ trả góp 0%*.</p><button class="cta" onclick="document.querySelector('#products').scrollIntoView({behavior:'smooth'})">Mua ngay</button></div><img alt="Điện thoại khuyến mãi" src="https://placehold.co/220x180/e5e7eb/333?text=SMARTPHONE"></div>
+ </section>
+ <section class="panel" id="brands">
+  <div class="brands" id="brandFilters">
+   <button class="brand active" data-brand="Tất cả" aria-label="Tất cả thương hiệu"><svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8L3 5z"/></svg><span class="brand-name">Tất cả</span></button><button class="brand" data-brand="Apple" aria-label="Apple / iPhone"><img class="brand-logo brand-logo--apple" src="images/brands/apple.svg" alt=""><span class="brand-name">iPhone</span></button><button class="brand" data-brand="Samsung" aria-label="Samsung"><img class="brand-logo" src="images/brands/samsung.svg" alt="Samsung"></button><button class="brand" data-brand="Xiaomi" aria-label="Xiaomi"><img class="brand-logo" src="images/brands/xiaomi.svg" alt="Xiaomi"></button><button class="brand" data-brand="OPPO" aria-label="OPPO"><img class="brand-logo" src="images/brands/oppo.svg" alt="OPPO"></button><button class="brand" data-brand="Vivo" aria-label="vivo"><img class="brand-logo" src="images/brands/vivo.svg" alt="vivo"></button><button class="brand" data-brand="Realme" aria-label="realme"><img class="brand-logo" src="images/brands/realme.svg" alt="realme"></button>
+  </div>
+  <div class="toolbar"><strong>Sắp xếp theo:</strong><select id="sort"><option value="featured">Nổi bật</option><option value="priceAsc">Giá thấp đến cao</option><option value="priceDesc">Giá cao đến thấp</option><option value="discount">Giảm giá nhiều</option></select><select id="priceFilter"><option value="all">Mọi mức giá</option><option value="under10">Dưới 10 triệu</option><option value="10to20">10–20 triệu</option><option value="over20">Trên 20 triệu</option></select><span id="resultCount"></span></div>
+ </section>
+ <section id="products"><div class="grid" id="productGrid"></div></section>
+</main>
+<footer id="footer"><div><h3>Tổng đài hỗ trợ</h3><p>Mua hàng: 1900 0000</p><p>Hỗ trợ kỹ thuật: 1900 0001</p></div><div><h3>Về chúng tôi</h3><p>Giới thiệu thegioidienthoai</p><p>Chính sách bảo hành</p><p>Chính sách đổi trả</p></div><div><h3>Thông tin khác</h3><p>Hướng dẫn mua hàng</p><p>Hướng dẫn thanh toán</p><p>Điều khoản sử dụng</p><p><a href="admin-login.html" style="color:var(--blue);font-weight:700">Đăng nhập quản trị</a></p></div><div><h3>Cam kết</h3><p>Thông tin sản phẩm minh họa cho đồ án.</p><p>Giá và ưu đãi là dữ liệu demo, không phải báo giá bán thực tế.</p></div></footer>
+<div class="modal" id="authModal"><div class="dialog">
+ <button class="close" onclick="closeModal('authModal')">×</button>
+ <div class="auth-tabs" role="tablist">
+  <button type="button" class="active" data-tab="login" role="tab" onclick="switchAuth('login')">Đăng nhập</button>
+  <button type="button" data-tab="register" role="tab" onclick="switchAuth('register')">Đăng ký</button>
+ </div>
+
+ <div class="auth-pane active" id="paneLogin">
+  <label for="loginId">Email hoặc số điện thoại</label>
+  <input id="loginId" placeholder="example@email.com" autocomplete="username">
+  <label for="loginPw">Mật khẩu</label>
+  <div class="pw-row">
+   <input id="loginPw" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password">
+   <button type="button" class="pw-toggle" onclick="togglePw('loginPw',this)" aria-label="Hiện mật khẩu">👁</button>
+  </div>
+  <div class="auth-extra">
+   <label><input type="checkbox" id="rememberMe" style="width:auto;margin:0"> Ghi nhớ đăng nhập</label>
+   <a onclick="tgddForgotOpen()">Quên mật khẩu?</a>
+  </div>
+  <button class="cta" style="width:100%" onclick="submitLogin()">Đăng nhập</button>
+  <p class="auth-switch">Chưa có tài khoản? <a onclick="switchAuth('register')">Đăng ký ngay</a></p>
+
+  <div class="forgot-box" id="forgotBox">
+   <div class="forgot-head">
+    <b>Khôi phục mật khẩu</b>
+    <a onclick="tgddForgotClose()" aria-label="Đóng">×</a>
+   </div>
+
+   <div id="fpStep1">
+    <p class="forgot-lead">Nhập email hoặc số điện thoại đã đăng ký, chúng tôi sẽ gửi mã xác thực để bạn đặt mật khẩu mới.</p>
+    <label for="fpId">Email hoặc số điện thoại</label>
+    <input id="fpId" placeholder="example@email.com" autocomplete="username">
+    <div class="forgot-err" id="fpErr1"></div>
+    <button class="cta" style="width:100%" onclick="tgddForgotSendOtp()">Gửi mã xác thực</button>
+   </div>
+
+   <div id="fpStep2" style="display:none">
+    <p class="forgot-lead">Mã xác thực đã gửi tới <b id="fpSentTo">—</b>. Mã hết hiệu lực sau <b id="fpCountdown">05:00</b>.</p>
+    <label for="fpOtp">Mã xác thực (6 số)</label>
+    <input id="fpOtp" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code"
+      onkeydown="if(event.key==='Enter'){event.preventDefault();tgddForgotConfirm()}">
+    <p class="forgot-demo">Mã OTP demo của bạn: <b id="fpOtpDemo">------</b></p>
+    <label for="fpPw">Mật khẩu mới</label>
+    <div class="pw-row">
+     <input id="fpPw" type="password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password">
+     <button type="button" class="pw-toggle" onclick="togglePw('fpPw',this)" aria-label="Hiện mật khẩu">👁</button>
+    </div>
+    <label for="fpPw2">Nhập lại mật khẩu mới</label>
+    <input id="fpPw2" type="password" placeholder="Nhập lại mật khẩu mới" autocomplete="new-password">
+    <div class="forgot-err" id="fpErr2"></div>
+    <button class="cta" id="fpConfirmBtn" style="width:100%" onclick="tgddForgotConfirm()">Đặt lại mật khẩu</button>
+    <p class="forgot-resend">Chưa nhận được mã? <a onclick="tgddForgotSendOtp()">Gửi lại mã</a></p>
+   </div>
+  </div>
+ </div>
+
+ <div class="auth-pane" id="paneRegister">
+  <label for="regName">Họ và tên</label>
+  <input id="regName" placeholder="Nguyễn Văn A" autocomplete="name">
+  <label for="regPhone">Số điện thoại</label>
+  <input id="regPhone" placeholder="09xx xxx xxx" inputmode="tel" autocomplete="tel">
+  <label for="regEmail">Email</label>
+  <input id="regEmail" type="email" placeholder="example@email.com" autocomplete="email">
+  <label for="regPw">Mật khẩu</label>
+  <div class="pw-row">
+   <input id="regPw" type="password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" oninput="pwStrength(this.value)">
+   <button type="button" class="pw-toggle" onclick="togglePw('regPw',this)" aria-label="Hiện mật khẩu">👁</button>
+  </div>
+  <div class="pw-strength"><i id="pwBar"></i></div>
+  <label for="regPw2">Nhập lại mật khẩu</label>
+  <input id="regPw2" type="password" placeholder="Nhập lại mật khẩu" autocomplete="new-password">
+  <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px;color:#667085">
+   <input type="checkbox" id="regTerms" style="width:auto;margin:2px 0 0">
+   <span>Tôi đồng ý với <a style="color:var(--blue)">Điều khoản sử dụng</a> và <a style="color:var(--blue)">Chính sách bảo mật</a>.</span>
+  </label>
+  <button class="cta" style="width:100%;margin-top:14px" onclick="submitRegister()">Tạo tài khoản</button>
+  <p class="auth-switch">Đã có tài khoản? <a onclick="switchAuth('login')">Đăng nhập</a></p>
+ </div>
+
+ <p class="specs" style="margin-bottom:0">Bản demo lưu tài khoản trong trình duyệt của bạn (localStorage) — không gửi lên máy chủ.</p>
+</div></div>
+
+<div class="modal" id="consentModal"><div class="dialog consent-dialog">
+ <button class="close" onclick="closeModal('consentModal')">×</button>
+ <h2>Xin sự đồng ý xử lý dữ liệu cá nhân</h2>
+ <div class="consent-body">
+  <p>Chào bạn, nhằm tuân thủ quy định pháp luật về bảo vệ dữ liệu cá nhân có hiệu lực từ ngày 01/01/2026 và để Điện Máy Xanh có thể phục vụ bạn tốt nhất trong việc mua sắm hàng hóa, bạn vui lòng đọc và đồng ý các lựa chọn dưới đây:</p>
+  <h3>1. Điều khoản bắt buộc (Để thực hiện giao dịch)</h3>
+  <p>Tôi đồng ý với <a onclick="showToast('Chính sách bảo vệ dữ liệu cá nhân — nội dung minh họa cho đồ án.')">Chính sách xử lý dữ liệu cá nhân (xem tại đây)</a> và cho phép cửa hàng thu thập và xử lý các dữ liệu cá nhân cơ bản (họ tên, số điện thoại, địa chỉ) cho mục đích hoàn tất đơn đặt hàng, bao gồm: thanh toán, giao hàng, bảo hành, xử lý khiếu nại, tạo tài khoản để quản lý đơn hàng.</p>
+  <h3>2. Các mục đích mở rộng (Không bắt buộc - Bạn có quyền lựa chọn)</h3>
+  <p>Cửa hàng mong muốn mang lại trải nghiệm cá nhân hóa tốt hơn cho bạn, vui lòng tích chọn nếu bạn cho phép xử lý dữ liệu cá nhân của bạn, bao gồm dữ liệu cá nhân cơ bản (họ tên, số điện thoại, địa chỉ, lịch sử mua hàng) và dữ liệu cá nhân nhạy cảm (dữ liệu theo dõi hành vi của bạn trên website) cho các mục đích sau:</p>
+ </div>
+ <label class="consent-check"><input type="checkbox" id="consentRequired" onchange="tgddSyncConsent()"><span><b>Điều khoản bắt buộc.</b> Tôi đồng ý với Chính sách xử lý dữ liệu cá nhân và cho phép xử lý dữ liệu cơ bản để hoàn tất đơn hàng, bảo hành và quản lý tài khoản.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentMarketing" onchange="tgddSyncConsent()"><span>Mục đích quảng cáo: Gửi thông tin về các chương trình khuyến mãi, ưu đãi mới nhất qua các kênh liên lạc.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentCare" onchange="tgddSyncConsent()"><span>Tiện lợi, chăm sóc khách hàng: Chăm sóc khách hàng tốt hơn.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentAnalytics" onchange="tgddSyncConsent()"><span>Phân tích nhu cầu và đề xuất sản phẩm phù hợp nhất.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentAll" onchange="tgddToggleConsentAll(this)"><span>Tôi đồng ý với tất cả các mục đích trên.</span></label>
+ <div class="consent-actions"><button class="cta" id="consentConfirm" disabled onclick="tgddConfirmConsent()">Xác nhận</button></div>
+ <p class="consent-note">Bạn có thể thay đổi lựa chọn này bất cứ lúc nào trong trang tài khoản.</p>
+</div></div>
+<div class="modal" id="tradeModal"><div class="dialog"><button class="close" onclick="closeModal('tradeModal')">×</button><h2>Đăng ký thu cũ đổi mới</h2><label>Hãng máy cũ</label><input id="oldBrand" placeholder="Ví dụ: Apple"><label>Tên máy / dung lượng</label><input id="oldModel" placeholder="Ví dụ: iPhone 13 128GB"><label>Tình trạng máy</label><input id="oldCondition" placeholder="Ví dụ: hoạt động tốt, xước nhẹ"><button class="cta" onclick="submitTrade()">Gửi yêu cầu định giá</button><p class="specs">Giá trị cuối cùng cần nhân viên kiểm tra thực tế.</p></div></div>
+<div class="toast" id="toast"></div>
+<script src="data.js"></script>
+<script src="auth.js"></script>
+<script src="shop.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="api-client.js"></script>
+<script src="api-overrides.js"></script>
+<script src="product-info.js"></script>
+<script src="reviews.js"></script>
+<script>
+let activeBrand='Tất cả', cart=0, compared=new Set(), chosen={};
+function render(){let q=document.getElementById('searchInput').value.trim().toLocaleLowerCase('vi');let pf=document.getElementById('priceFilter').value;let list=products.filter(p=>(activeBrand==='Tất cả'||p.brand===activeBrand)&&(`${p.name} ${p.brand}`.toLocaleLowerCase('vi').includes(q))&&(pf==='all'||(pf==='under10'&&p.price<10000000)||(pf==='10to20'&&p.price>=10000000&&p.price<=20000000)||(pf==='over20'&&p.price>20000000)));let sort=document.getElementById('sort').value;if(sort==='priceAsc')list.sort((a,b)=>a.price-b.price);if(sort==='priceDesc')list.sort((a,b)=>b.price-a.price);if(sort==='discount')list.sort((a,b)=>(b.old-b.price)-(a.old-a.price));if(sort==='featured')list.sort((a,b)=>b.featured-a.featured);document.getElementById('resultCount').textContent=`${list.length} sản phẩm`;document.getElementById('productGrid').innerHTML=list.length?list.map(p=>{let mem=chosen[p.id]||p.memory[0];let stockHtml=(window.TG&&TG.stockBadge)?TG.stockBadge(p,mem,null):'';let img=(p.images&&p.images[0])||p.img;let colorLine=p.colors?`<div class="specs">${p.brand} · ${p.colors.length} màu: ${p.colors.map(c=>`<span class="c-swatch" style="background:${swatchColors[c]||'#ccc'}"></span>${c}`).join(' · ')}</div>`:`<div class="specs">${p.brand} · ${p.color} · Màn hình cảm ứng</div>`;let price=priceFor(p,mem);let old=oldPriceFor(p,mem)>price?oldPriceFor(p,mem):Math.round(price*1.12/10000)*10000;return `<article class="card" onclick="openDetail(${p.id})"><div class="product-img"><img src="${img}" alt="${p.name}"></div><div class="tags"><span class="tag">Trả góp 0%</span><span class="tag">Ưu đãi</span></div><div class="name">${p.name}</div>${colorLine}<div class="memory">${p.memory.map(m=>{let q=(window.TG&&TG.memoryStock)?TG.memoryStock(p,m):null;let s=(window.TG&&TG.stockState)?TG.stockState(q,(window.TG&&TG.thresholdOf)?TG.thresholdOf(p):undefined):null;let tag=s?(s.key==='out'?' · Hết hàng':s.key==='low'?' · Còn '+q:''):'';return `<button class="${m===mem?'active':''}${s?' stock-'+s.key:''}" onclick="chooseMemory(${p.id},'${m}',event)">${memoryLabel(p,m)}${tag}</button>`}).join('')}</div>${stockHtml}<div class="tag">🎁 ${p.gift}</div><div class="price">${money(price)}</div><div class="old">${money(old)} · -${Math.round((old-price)/old*100)}%</div><div class="rating">${(typeof cardRatingHtml==='function')?cardRatingHtml(p):('<strong>★ '+p.rating+'</strong> · Đã bán '+p.sold)}</div>${(typeof cardSpecLine==='function'&&cardSpecLine(p))?'<div class="specs specs-line">'+cardSpecLine(p)+'</div>':''}<div class="card-bottom"><button class="compare" onclick="compareProduct(${p.id},event)">⊕ ${compared.has(p.id)?'Đã chọn':'So sánh'}</button><button class="compare" onclick="addCart(${p.id},event)">＋ Giỏ hàng</button></div></article>`}).join(''):'<div class="empty">Không tìm thấy sản phẩm phù hợp. Hãy đổi từ khóa hoặc bộ lọc.</div>'}
+function openDetail(id){location.href='product.html?id='+id}
+function chooseMemory(id,m,ev){if(ev&&ev.stopPropagation)ev.stopPropagation();chosen[id]=m;render()}function compareProduct(id,ev){if(ev&&ev.stopPropagation)ev.stopPropagation();if(compared.has(id))compared.delete(id);else if(compared.size<3)compared.add(id);else return showToast('Chỉ có thể so sánh tối đa 3 sản phẩm.');render();if(compared.size)showToast('Đã chọn '+compared.size+' sản phẩm để so sánh.')}
+function addCart(id,ev){if(ev&&ev.stopPropagation)ev.stopPropagation();const p=products.find(x=>x.id===id);const mem=chosen[id]||p.memory[0];const color=p.colors?p.colors[0]:'';if(window.TG&&TG.memoryStock){const q=TG.memoryStock(p,mem);if(q!=null&&q<=0){showToast('Phiên bản '+memoryLabel(p,mem)+' này đã hết hàng. Vui lòng chọn dung lượng khác hoặc xem chi tiết.');return;}}const v=(window.TG&&TG.findVariant)?TG.findVariant(p.id,mem,color):null;tgddCartAdd({productId:p.id,variantId:v?v.id:null,name:p.name,mem:memoryLabel(p,mem),memory:mem,color:color,price:priceFor(p,mem)},1);showToast('Đã thêm '+p.name+' vào giỏ hàng.');tgddRenderCartCount()}
+function submitLogin(){tgddLoginSubmit()}
+function submitRegister(){tgddRegister()}
+function submitTrade(){let b=document.getElementById('oldBrand').value.trim(),m=document.getElementById('oldModel').value.trim(),c=document.getElementById('oldCondition').value.trim();if(!b||!m||!c)return showToast('Vui lòng nhập đầy đủ thông tin máy cũ.');closeModal('tradeModal');showToast('Đã ghi nhận yêu cầu demo. Backend cần được tích hợp để lưu yêu cầu.')}
+document.getElementById('brandFilters').addEventListener('click',e=>{let b=e.target.closest('button[data-brand]');if(!b)return;activeBrand=b.dataset.brand;document.querySelectorAll('.brand').forEach(x=>x.classList.toggle('active',x===b));render()});
+document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();render()});
+/* Khôi phục từ khóa từ ?q= khi quay lại từ trang chi tiết / trang tài khoản */
+(function(){const q=new URLSearchParams(location.search);if(q.get('q'))document.getElementById('searchInput').value=q.get('q');})();
+document.getElementById('searchInput').addEventListener('input',render);document.getElementById('sort').addEventListener('change',render);document.getElementById('priceFilter').addEventListener('change',render);render();
+/* ?login=1: quay lại từ trang tài khoản khi chưa đăng nhập */
+(function(){if(new URLSearchParams(location.search).get('login')&&!tgddCurrentUser()){switchAuth('login');openModal('authModal')}})();
+tgddRenderCartCount();
+/* Admin sửa giá / tồn kho / thêm hay xoá máy -> vẽ lại lưới sản phẩm ngay,
+   không cần tải lại trang. Đăng ký sau khi render() đã được định nghĩa. */
+if(window.TG&&TG.onProducts)TG.onProducts(function(){try{render()}catch(e){}});
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+/* ================= Trang quản trị ================= */
+[hidden]{display:none!important}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 18px;border-radius:9px;display:none;z-index:60;font-size:13.5px;box-shadow:0 8px 24px #0004}
+.admin-login{min-height:100vh;background:linear-gradient(135deg,#0f172a,#1e293b 60%,#0b3a6f);display:grid;place-items:center;padding:24px}
+.al-card{width:min(460px,100%);background:#fff;border-radius:16px;padding:26px 26px 22px;box-shadow:0 20px 60px #0006}
+.al-brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.al-brand .mark{width:40px;height:40px;border-radius:10px;background:#111;display:grid;place-items:center;color:#ffd400;font-weight:900;font-size:18px}
+.al-brand b{font-size:17px;letter-spacing:-.3px}
+.al-sub{font-size:13px;color:#667085;margin:2px 0 18px}
+.al-card label{display:block;font-size:12.5px;color:#667085;margin:12px 0 6px}
+.al-card input{width:100%;padding:12px;border:1px solid #e4e7ec;border-radius:9px;font-size:14px;outline:0}
+.al-card input:focus{border-color:#1685ff;box-shadow:0 0 0 3px #1685ff22}
+.al-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#667085;margin:10px 0 4px}
+.al-btn{width:100%;margin-top:16px;background:#1685ff;color:#fff;border:0;border-radius:9px;padding:13px;font-size:15px;font-weight:700;cursor:pointer}
+.al-btn:disabled{background:#a9c8f5;cursor:not-allowed}
+.al-note{font-size:12px;color:#98a2b3;margin-top:12px;line-height:1.55}
+.al-err{background:#fef3f2;color:#b42318;border:1px solid #fecdca;border-radius:8px;padding:9px 11px;font-size:13px;margin-top:12px;display:none}
+.al-ok{background:#ecfdf3;color:#027a48;border:1px solid #abefc6;border-radius:8px;padding:9px 11px;font-size:13px;margin-top:12px;display:none}
+.al-hint{font-size:12px;background:#f8fafc;border:1px dashed #cfd8e3;border-radius:9px;padding:10px 12px;color:#475467;margin-top:14px;line-height:1.6}
+.al-hint code{background:#eef2f7;border-radius:4px;padding:1px 5px;font-size:12px}
+
+/* Khung quản trị */
+.adm{min-height:100vh;background:#f2f4f7;display:grid;grid-template-columns:250px minmax(0,1fr)}
+.adm-side{background:#0f172a;color:#cbd5e1;display:flex;flex-direction:column;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.adm-brand{display:flex;align-items:center;gap:9px;color:#fff;font-weight:800;font-size:15px;padding:4px 8px 16px}
+.adm-brand .mark{width:32px;height:32px;border-radius:9px;background:#ffd400;color:#111;display:grid;place-items:center;font-weight:900}
+.adm-brand small{display:block;font-size:10.5px;font-weight:500;color:#94a3b8;letter-spacing:.4px}
+.adm-nav{display:grid;gap:3px}
+.adm-nav a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:9px;font-size:13.5px;color:#cbd5e1;cursor:pointer}
+.adm-nav a:hover{background:#1e293b;color:#fff}
+.adm-nav a.active{background:#1685ff;color:#fff;font-weight:700}
+.adm-nav a .ico{width:18px;text-align:center;opacity:.9}
+.adm-user{margin-top:auto;border-top:1px solid #1e293b;padding-top:14px;font-size:12px;color:#94a3b8}
+.adm-user b{color:#fff;display:block;font-size:13.5px}
+.adm-user .role{display:inline-block;margin:6px 0;background:#1e293b;border-radius:20px;padding:2px 9px;font-size:11px;color:#cbd5e1}
+.adm-user button{width:100%;margin-top:8px;background:#1e293b;color:#fecaca;border:0;border-radius:8px;padding:9px;cursor:pointer;font-size:12.5px}
+.adm-main{padding:22px 26px 40px;min-width:0}
+.adm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.adm-head h1{font-size:22px;margin:0 0 4px}
+.adm-head p{margin:0;color:#667085;font-size:13px}
+.adm-search{display:flex;gap:8px;background:#fff;border:1px solid #e4e7ec;border-radius:9px;padding:4px 4px 4px 12px;align-items:center}
+.adm-search input{border:0;outline:0;padding:8px 4px;font-size:13.5px;min-width:230px;background:transparent}
+.adm-search button{border:0;background:#1685ff;color:#fff;border-radius:7px;padding:9px 14px;font-size:13px;cursor:pointer}
+
+/* Thẻ số liệu */
+.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.stat{background:#fff;border:1px solid #e4e7ec;border-radius:12px;padding:16px 17px}
+.stat .k{font-size:12.5px;color:#667085;display:flex;justify-content:space-between;gap:8px}
+.stat .v{font-size:24px;font-weight:800;margin-top:7px;letter-spacing:-.5px}
+.stat .s{font-size:12px;color:#98a2b3;margin-top:4px}
+.stat .s.up{color:#027a48}.stat .s.down{color:#b42318}
+
+/* Bảng */
+.panel-adm{background:#fff;border:1px solid #e4e7ec;border-radius:12px;overflow:hidden;margin-bottom:18px}
+.panel-adm h2{font-size:15px;margin:0;padding:15px 17px;border-bottom:1px solid #eef2f7}
+.table-wrap{overflow-x:auto}
+table.adm-t{width:100%;border-collapse:collapse;font-size:13px;min-width:640px}
+table.adm-t th{background:#f8fafc;text-align:left;padding:11px 14px;font-weight:700;color:#475467;white-space:nowrap;font-size:12.5px}
+table.adm-t td{padding:11px 14px;border-top:1px solid #eef2f7;vertical-align:middle}
+table.adm-t tr:hover td{background:#fcfdff}
+.pill{display:inline-block;border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.pill.in{background:#ecfdf3;color:#027a48}
+.pill.low{background:#fffaeb;color:#b54708}
+.pill.out{background:#fef3f2;color:#b42318}
+.pill.paused{background:#f2f4f7;color:#475467}
+.pill.wait{background:#eff8ff;color:#175cd3}
+.pill.pack{background:#f4f3ff;color:#5925dc}
+.pill.ship{background:#eef4ff;color:#3538cd}
+.pill.done{background:#ecfdf3;color:#027a48}
+.pill.rej{background:#fef3f2;color:#b42318}
+.pill.cancel{background:#f2f4f7;color:#475467}
+.mono{font-family:Consolas,Menlo,monospace;font-size:12.5px}
+.btn-s{border:1px solid #d0d5dd;background:#fff;border-radius:7px;padding:6px 10px;font-size:12.5px;cursor:pointer;color:#344054;white-space:nowrap}
+.btn-s:hover{border-color:#1685ff;color:#1685ff}
+.btn-s.primary{background:#1685ff;border-color:#1685ff;color:#fff}
+.btn-s.ok{background:#12b76a;border-color:#12b76a;color:#fff}
+.btn-s.danger{background:#fff;border-color:#fda29b;color:#b42318}
+.btn-s:disabled{opacity:.45;cursor:not-allowed}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+input.cell{border:1px solid #d0d5dd;border-radius:6px;padding:6px 8px;font-size:13px;width:110px}
+input.cell.num{text-align:right}
+.toolbar-adm{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:12px 17px;border-bottom:1px solid #eef2f7;background:#fcfdff}
+.toolbar-adm select,.toolbar-adm input{border:1px solid #d0d5dd;border-radius:8px;padding:8px 10px;font-size:13px;background:#fff}
+.toolbar-adm .count{font-size:12.5px;color:#667085;margin-left:auto}
+.empty-adm{padding:38px 18px;text-align:center;color:#98a2b3;font-size:13.5px}
+.audit-before{color:#b42318;text-decoration:line-through}
+.audit-after{color:#027a48;font-weight:700}
+.two-col{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:start}
+.kv{display:grid;gap:0}
+.kv div{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px dashed #eef2f7;font-size:13px}
+.kv div:last-child{border-bottom:0}
+.kv span:first-child{color:#667085}
+.kv span:last-child{font-weight:600;text-align:right}
+.detail-block{padding:16px 17px}
+.detail-block h3{font-size:14px;margin:0 0 10px}
+.adm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.adm-tabs button{border:1px solid #e4e7ec;background:#fff;border-radius:8px;padding:9px 15px;font-size:13px;cursor:pointer;color:#344054}
+.adm-tabs button.active{border-color:#1685ff;background:#eff8ff;color:#175cd3;font-weight:700}
+.chip-n{display:inline-block;background:#fee4e2;color:#b42318;border-radius:20px;padding:1px 7px;font-size:11px;font-weight:800;margin-left:5px}
+
+@media(max-width:1100px){.stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.two-col{grid-template-columns:1fr}}
+@media(max-width:820px){.adm{grid-template-columns:1fr}.adm-side{position:static;height:auto;flex-direction:column}.adm-nav{grid-template-columns:repeat(2,1fr)}.adm-main{padding:16px}}
+
