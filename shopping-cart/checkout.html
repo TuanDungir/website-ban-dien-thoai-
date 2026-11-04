@@ -1,0 +1,62 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đặt hàng | thegioidienthoai</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-promo">SIÊU ƯU ĐÃI ĐIỆN THOẠI — THU CŨ ĐỔI MỚI, TIẾT KIỆM ĐẾN HÀNG TRIỆU ĐỒNG</div>
+<header>
+ <div class="head">
+  <a class="logo" href="index.html" aria-label="thegioidienthoai.com">
+   <svg class="logo-mark" viewBox="0 0 100 100" role="img" aria-hidden="true">
+    <circle cx="50" cy="50" r="48" fill="#111"/>
+    <g fill="#ffd400">
+     <circle cx="34" cy="24" r="7"/>
+     <rect x="56" y="20" width="12" height="12" rx="1.5" transform="rotate(45 62 26)"/>
+     <rect x="24" y="40" width="14" height="14" rx="2"/>
+     <rect x="42" y="40" width="14" height="14" rx="2"/>
+     <rect x="60" y="40" width="14" height="14" rx="2"/>
+     <rect x="33" y="58" width="14" height="14" rx="2"/>
+     <rect x="51" y="58" width="14" height="14" rx="2"/>
+     <rect x="42" y="76" width="14" height="14" rx="2"/>
+    </g>
+   </svg>
+   <span class="logo-text">thegioidienthoai<span class="logo-tld">.com</span></span>
+  </a>
+  <form class="search" id="searchForm"><span>⌕</span>&nbsp;<input id="searchInput" placeholder="Bạn tìm điện thoại nào?" aria-label="Tìm kiếm sản phẩm"></form>
+  <button class="headbtn" id="authBtn" onclick="location.href='index.html?login=1'">♙ Đăng nhập</button>
+  <button class="headbtn" onclick="showToast('Voucher mẫu: WELCOME50 — áp dụng khi thanh toán.')">🎟 Voucher</button>
+  <button class="headbtn" onclick="location.href='checkout.html?step=cart'">🛒 Giỏ hàng <span data-cart-count>(0)</span></button>
+  <span class="location">⌖ Hà Nội ▾</span>
+ </div>
+ <nav class="nav"><a href="index.html#products">Điện thoại</a><a href="index.html#brands">Hãng điện thoại</a><a href="index.html#tradein">Thu cũ, đổi mới</a><a href="index.html#promotions">Khuyến mãi</a><a href="index.html#products">Điện thoại bán chạy</a><a href="index.html#footer">Hỗ trợ</a></nav>
+</header>
+
+<main>
+ <div class="crumb">Trang chủ › <a href="index.html">Điện thoại</a> › <span id="crumbStep">Đặt hàng</span></div>
+
+ <div class="step-bar" id="stepBar"></div>
+
+ <div class="co-wrap">
+  <div id="stepBody"></div>
+  <aside class="sum" id="sumBox"></aside>
+ </div>
+</main>
+
+<footer id="footer"><div><h3>Tổng đài hỗ trợ</h3><p>Mua hàng: 1900 0000</p><p>Hỗ trợ kỹ thuật: 1900 0001</p></div><div><h3>Về chúng tôi</h3><p>Giới thiệu thegioidienthoai</p><p>Chính sách bảo hành</p><p>Chính sách đổi trả</p></div><div><h3>Thông tin khác</h3><p>Hướng dẫn mua hàng</p><p>Hướng dẫn thanh toán</p><p>Điều khoản sử dụng</p></div><div><h3>Cam kết</h3><p>Thông tin sản phẩm minh họa cho đồ án.</p><p>Giá và ưu đãi là dữ liệu demo, không phải báo giá bán thực tế.</p></div></footer>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="auth.js"></script>
+<script src="shop.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="api-client.js"></script>
+<script src="api-overrides.js"></script>
+<script src="vn-address.js"></script>
+<script src="address.js"></script>
+<script src="checkout.js"></script>
+</body>
+</html>
