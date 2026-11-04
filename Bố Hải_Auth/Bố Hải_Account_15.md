@@ -1,4 +1,4 @@
-# TV02 — Xác thực + Tài khoản + Địa chỉ (15%)
+# Bố Hải — Xác thực + Tài khoản + Địa chỉ (15%)
 
 ## File phụ trách
 - `thegioidienthoai_project/auth.js` (358 dòng)
