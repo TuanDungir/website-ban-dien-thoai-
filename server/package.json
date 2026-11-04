@@ -1,0 +1,22 @@
+{
+  "name": "thegioidienthoai-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Backend đồng bộ dữ liệu Client <-> Admin cho đồ án thegioidienthoai",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "seed": "node src/seed.js && node tools/import-catalog.js",
+    "import-catalog": "node tools/import-catalog.js",
+    "test": "node test/e2e.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}
