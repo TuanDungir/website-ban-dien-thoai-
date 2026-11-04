@@ -1,0 +1,174 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tài khoản của tôi | thegioidienthoai</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-promo">SIÊU ƯU ĐÃI ĐIỆN THOẠI — THU CŨ ĐỔI MỚI, TIẾT KIỆM ĐẾN HÀNG TRIỆU ĐỒNG</div>
+<header>
+ <div class="head">
+  <a class="logo" href="index.html" aria-label="thegioidienthoai.com">
+   <svg class="logo-mark" viewBox="0 0 100 100" role="img" aria-hidden="true">
+    <circle cx="50" cy="50" r="48" fill="#111"/>
+    <g fill="#ffd400">
+     <circle cx="34" cy="24" r="7"/>
+     <rect x="56" y="20" width="12" height="12" rx="1.5" transform="rotate(45 62 26)"/>
+     <rect x="24" y="40" width="14" height="14" rx="2"/>
+     <rect x="42" y="40" width="14" height="14" rx="2"/>
+     <rect x="60" y="40" width="14" height="14" rx="2"/>
+     <rect x="33" y="58" width="14" height="14" rx="2"/>
+     <rect x="51" y="58" width="14" height="14" rx="2"/>
+     <rect x="42" y="76" width="14" height="14" rx="2"/>
+    </g>
+   </svg>
+   <span class="logo-text">thegioidienthoai<span class="logo-tld">.com</span></span>
+  </a>
+  <form class="search" id="searchForm"><span>⌕</span>&nbsp;<input id="searchInput" placeholder="Bạn tìm điện thoại nào?" aria-label="Tìm kiếm sản phẩm"></form>
+  <button class="headbtn" id="authBtn" onclick="openModal('authModal')">♙ Đăng nhập</button>
+  <button class="headbtn" onclick="showToast('Voucher mẫu: WELCOME50 — áp dụng khi thanh toán.')">🎟 Voucher</button>
+  <button class="headbtn" onclick="location.href='checkout.html?step=cart'">🛒 Giỏ hàng <span data-cart-count>(0)</span></button>
+  <span class="location">⌖ Hà Nội ▾</span>
+ </div>
+ <nav class="nav"><a href="index.html#products">Điện thoại</a><a href="index.html#brands">Hãng điện thoại</a><a href="index.html#tradein">Thu cũ, đổi mới</a><a href="index.html#promotions">Khuyến mãi</a><a href="index.html#products">Điện thoại bán chạy</a><a href="index.html#footer">Hỗ trợ</a></nav>
+</header>
+
+<main class="acct-wrap">
+ <aside class="acct-side">
+  <section class="vip">
+   <h2 id="vipName">—</h2>
+   <div class="vip-phone" id="vipPhone"></div>
+   <div class="vip-card">
+    <div>
+     <strong>Tổng điểm tích lũy: <span id="vipPoints">0</span> điểm</strong>
+     <small>Tích &amp; sử dụng điểm cho khách hàng thân thiết. Sản phẩm của tập đoàn MWG.</small>
+     <a onclick="showToast('Điểm thưởng là dữ liệu minh họa cho đồ án.')">Tìm hiểu thêm</a>
+     <div class="stores"><span>Download on the<b>App Store</b></span><span>GET IT ON<b>Google Play</b></span></div>
+    </div>
+    <div class="qr" aria-label="Mã QR tải ứng dụng"></div>
+   </div>
+  </section>
+  <nav class="acct-menu">
+   <a data-tab="orders" onclick="switchTab('orders')"><span class="ico g">▤</span> Đơn hàng đã mua</a>
+   <a data-tab="vouchers" onclick="switchTab('vouchers')"><span class="ico p">%</span> Kho voucher</a>
+   <a data-tab="profile" onclick="switchTab('profile')"><span class="ico b">☺</span> Thông tin của tôi</a>
+   <a class="logout" onclick="doLogout()"><span class="ico" style="color:var(--red)">⇥</span> Đăng xuất</a>
+  </nav>
+ </aside>
+ <section class="acct-main" id="acctMain"></section>
+</main>
+
+<footer id="footer"><div><h3>Tổng đài hỗ trợ</h3><p>Mua hàng: 1900 0000</p><p>Hỗ trợ kỹ thuật: 1900 0001</p></div><div><h3>Về chúng tôi</h3><p>Giới thiệu thegioidienthoai</p><p>Chính sách bảo hành</p><p>Chính sách đổi trả</p></div><div><h3>Thông tin khác</h3><p>Hướng dẫn mua hàng</p><p>Hướng dẫn thanh toán</p><p>Điều khoản sử dụng</p></div><div><h3>Cam kết</h3><p>Thông tin sản phẩm minh họa cho đồ án.</p><p>Giá và ưu đãi là dữ liệu demo, không phải báo giá bán thực tế.</p></div></footer>
+
+<div class="modal" id="authModal"><div class="dialog">
+ <button class="close" onclick="closeModal('authModal')">×</button>
+ <div class="auth-tabs" role="tablist">
+  <button type="button" class="active" data-tab="login" role="tab" onclick="switchAuth('login')">Đăng nhập</button>
+  <button type="button" data-tab="register" role="tab" onclick="switchAuth('register')">Đăng ký</button>
+ </div>
+ <div class="auth-pane active" id="paneLogin">
+  <label for="loginId">Email hoặc số điện thoại</label>
+  <input id="loginId" placeholder="example@email.com" autocomplete="username">
+  <label for="loginPw">Mật khẩu</label>
+  <div class="pw-row">
+   <input id="loginPw" type="password" placeholder="Nhập mật khẩu" autocomplete="current-password">
+   <button type="button" class="pw-toggle" onclick="togglePw('loginPw',this)" aria-label="Hiện mật khẩu">👁</button>
+  </div>
+  <div class="auth-extra">
+   <label><input type="checkbox" id="rememberMe" style="width:auto;margin:0"> Ghi nhớ đăng nhập</label>
+   <a onclick="tgddForgotOpen()">Quên mật khẩu?</a>
+  </div>
+  <button class="cta" style="width:100%" onclick="submitLogin()">Đăng nhập</button>
+  <p class="auth-switch">Chưa có tài khoản? <a onclick="switchAuth('register')">Đăng ký ngay</a></p>
+
+  <div class="forgot-box" id="forgotBox">
+   <div class="forgot-head">
+    <b>Khôi phục mật khẩu</b>
+    <a onclick="tgddForgotClose()" aria-label="Đóng">×</a>
+   </div>
+
+   <div id="fpStep1">
+    <p class="forgot-lead">Nhập email hoặc số điện thoại đã đăng ký, chúng tôi sẽ gửi mã xác thực để bạn đặt mật khẩu mới.</p>
+    <label for="fpId">Email hoặc số điện thoại</label>
+    <input id="fpId" placeholder="example@email.com" autocomplete="username">
+    <div class="forgot-err" id="fpErr1"></div>
+    <button class="cta" style="width:100%" onclick="tgddForgotSendOtp()">Gửi mã xác thực</button>
+   </div>
+
+   <div id="fpStep2" style="display:none">
+    <p class="forgot-lead">Mã xác thực đã gửi tới <b id="fpSentTo">—</b>. Mã hết hiệu lực sau <b id="fpCountdown">05:00</b>.</p>
+    <label for="fpOtp">Mã xác thực (6 số)</label>
+    <input id="fpOtp" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code"
+      onkeydown="if(event.key==='Enter'){event.preventDefault();tgddForgotConfirm()}">
+    <p class="forgot-demo">Mã OTP demo của bạn: <b id="fpOtpDemo">------</b></p>
+    <label for="fpPw">Mật khẩu mới</label>
+    <div class="pw-row">
+     <input id="fpPw" type="password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password">
+     <button type="button" class="pw-toggle" onclick="togglePw('fpPw',this)" aria-label="Hiện mật khẩu">👁</button>
+    </div>
+    <label for="fpPw2">Nhập lại mật khẩu mới</label>
+    <input id="fpPw2" type="password" placeholder="Nhập lại mật khẩu mới" autocomplete="new-password">
+    <div class="forgot-err" id="fpErr2"></div>
+    <button class="cta" id="fpConfirmBtn" style="width:100%" onclick="tgddForgotConfirm()">Đặt lại mật khẩu</button>
+    <p class="forgot-resend">Chưa nhận được mã? <a onclick="tgddForgotSendOtp()">Gửi lại mã</a></p>
+   </div>
+  </div>
+ </div>
+ <div class="auth-pane" id="paneRegister">
+  <label for="regName">Họ và tên</label>
+  <input id="regName" placeholder="Nguyễn Văn A" autocomplete="name">
+  <label for="regPhone">Số điện thoại</label>
+  <input id="regPhone" placeholder="09xx xxx xxx" inputmode="tel" autocomplete="tel">
+  <label for="regEmail">Email</label>
+  <input id="regEmail" type="email" placeholder="example@email.com" autocomplete="email">
+  <label for="regPw">Mật khẩu</label>
+  <div class="pw-row">
+   <input id="regPw" type="password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" oninput="pwStrength(this.value)">
+   <button type="button" class="pw-toggle" onclick="togglePw('regPw',this)" aria-label="Hiện mật khẩu">👁</button>
+  </div>
+  <div class="pw-strength"><i id="pwBar"></i></div>
+  <label for="regPw2">Nhập lại mật khẩu</label>
+  <input id="regPw2" type="password" placeholder="Nhập lại mật khẩu" autocomplete="new-password">
+  <label style="display:flex;gap:8px;align-items:flex-start;font-weight:400;font-size:13px;color:#667085">
+   <input type="checkbox" id="regTerms" style="width:auto;margin:2px 0 0">
+   <span>Tôi đồng ý với <a style="color:var(--blue)">Điều khoản sử dụng</a> và <a style="color:var(--blue)">Chính sách bảo mật</a>.</span>
+  </label>
+  <button class="cta" style="width:100%;margin-top:14px" onclick="submitRegister()">Tạo tài khoản</button>
+  <p class="auth-switch">Đã có tài khoản? <a onclick="switchAuth('login')">Đăng nhập</a></p>
+ </div>
+ <p class="specs" style="margin-bottom:0">Bản demo lưu tài khoản trong trình duyệt của bạn (localStorage) — không gửi lên máy chủ.</p>
+</div></div>
+
+<div class="modal" id="consentModal"><div class="dialog consent-dialog">
+ <button class="close" onclick="closeModal('consentModal')">×</button>
+ <h2>Xin sự đồng ý xử lý dữ liệu cá nhân</h2>
+ <div class="consent-body">
+  <p>Chào bạn, nhằm tuân thủ quy định pháp luật về bảo vệ dữ liệu cá nhân có hiệu lực từ ngày 01/01/2026 và để cửa hàng có thể phục vụ bạn tốt nhất trong việc mua sắm hàng hóa, bạn vui lòng đọc và đồng ý các lựa chọn dưới đây:</p>
+  <h3>1. Điều khoản bắt buộc (Để thực hiện giao dịch)</h3>
+  <p>Tôi đồng ý với <a onclick="showToast('Chính sách bảo vệ dữ liệu cá nhân — nội dung minh họa cho đồ án.')">Chính sách xử lý dữ liệu cá nhân (xem tại đây)</a> và cho phép cửa hàng thu thập và xử lý các dữ liệu cá nhân cơ bản (họ tên, số điện thoại, địa chỉ) cho mục đích hoàn tất đơn đặt hàng, bao gồm: thanh toán, giao hàng, bảo hành, xử lý khiếu nại, tạo tài khoản để quản lý đơn hàng.</p>
+  <h3>2. Các mục đích mở rộng (Không bắt buộc - Bạn có quyền lựa chọn)</h3>
+  <p>Cửa hàng mong muốn mang lại trải nghiệm cá nhân hóa tốt hơn cho bạn, vui lòng tích chọn nếu bạn cho phép xử lý dữ liệu cá nhân của bạn, bao gồm dữ liệu cá nhân cơ bản (họ tên, số điện thoại, địa chỉ, lịch sử mua hàng) và dữ liệu cá nhân nhạy cảm (dữ liệu theo dõi hành vi của bạn trên website) cho các mục đích sau:</p>
+ </div>
+ <label class="consent-check"><input type="checkbox" id="consentRequired" onchange="tgddSyncConsent()"><span><b>Điều khoản bắt buộc.</b> Tôi đồng ý với Chính sách xử lý dữ liệu cá nhân và cho phép xử lý dữ liệu cơ bản để hoàn tất đơn hàng, bảo hành và quản lý tài khoản.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentMarketing" onchange="tgddSyncConsent()"><span>Mục đích quảng cáo: Gửi thông tin về các chương trình khuyến mãi, ưu đãi mới nhất qua các kênh liên lạc.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentCare" onchange="tgddSyncConsent()"><span>Tiện lợi, chăm sóc khách hàng: Chăm sóc khách hàng tốt hơn.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentAnalytics" onchange="tgddSyncConsent()"><span>Phân tích nhu cầu và đề xuất sản phẩm phù hợp nhất.</span></label>
+ <label class="consent-check"><input type="checkbox" id="consentAll" onchange="tgddToggleConsentAll(this)"><span>Tôi đồng ý với tất cả các mục đích trên.</span></label>
+ <div class="consent-actions"><button class="cta" id="consentConfirm" disabled onclick="tgddConfirmConsent()">Xác nhận</button></div>
+ <p class="consent-note">Bạn có thể thay đổi lựa chọn này bất cứ lúc nào trong trang tài khoản.</p>
+</div></div>
+
+<div class="toast" id="toast"></div>
+<script src="data.js"></script>
+<script src="auth.js"></script>
+<script src="shop.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="api-client.js"></script>
+<script src="api-overrides.js"></script>
+<script src="vn-address.js"></script>
+<script src="address.js"></script>
+<script src="account.js"></script>
+</body>
+</html>
