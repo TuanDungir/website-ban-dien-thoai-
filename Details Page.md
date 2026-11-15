@@ -1,4 +1,4 @@
-# TV04 — Trang chi tiết + Thông số + Đánh giá (15%)
+# — Trang chi tiết + Thông số + Đánh giá
 
 ## File phụ trách
 - `thegioidienthoai_project/product.html` (300 dòng)
