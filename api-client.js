@@ -111,6 +111,8 @@
       memoryPrices,
       memoryOld,
       colorImages,
+      extraImages: specs.extraImages || [],
+      memoryRam: specs.memoryRam || {},
       variantMap,
       /* Tồn kho theo từng biến thể để giao diện cảnh báo hết hàng */
       stockByVariant: variants.reduce((m, v) => { m[v.id] = v.stock; return m; }, {}),
