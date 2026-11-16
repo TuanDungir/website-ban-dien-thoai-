@@ -320,13 +320,18 @@
   TG.normalizeUser = normalizeUser;
 
   function rememberUser(user) {
-    TG.user = normalizeUser(user);
+    let cached = null;
+    try { cached = JSON.parse(localStorage.getItem(USER_DATA_KEY) || 'null'); } catch (_) {}
+    const previous = TG.user || cached;
+    const merged = previous && previous.id === user.id ? Object.assign({}, previous, user) : user;
+    TG.user = normalizeUser(merged);
     try {
-      localStorage.setItem(USER_DATA_KEY, JSON.stringify(user));
+      localStorage.setItem(USER_DATA_KEY, JSON.stringify(TG.user));
     } catch (_) {}
   }
 
   TG.currentUser = () => TG.user;
+  TG.rememberUser = rememberUser;
 
   async function register(payload) {
     const data = await api('/auth/register', { method: 'POST', body: payload, auth: false });
