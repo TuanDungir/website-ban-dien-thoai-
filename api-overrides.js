@@ -212,12 +212,14 @@
   /* ------------------------------ Lịch sử đơn ------------------------------ */
   /* Trang order.html?code=... đọc một đơn cụ thể */
   window.tgddGetOrder = function (code) {
+    if (!TG.user) return fallback.getOrder(code);
     if (!code) return null;
     const list = (window.TG && TG.orders) || [];
     return list.find((o) => o.code === code || o.id === code) || null;
   };
 
   window.tgddUpdateOrder = function (code, patch) {
+    if (!TG.user) return fallback.updateOrder(code, patch);
     const list = (window.TG && TG.orders) || [];
     const o = list.find((x) => x.code === code);
     if (o) Object.assign(o, patch);
