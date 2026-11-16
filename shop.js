@@ -28,6 +28,12 @@ function tgddCartAdd(item, qty) {
   const increment = Number(qty == null ? 1 : qty);
   if (!Number.isInteger(increment) || increment < 1) return null;
   const quantity = Math.min(99, (found ? found.qty : 0) + increment);
+  const product = window.TG && TG.productList ? TG.productList().find(p => p.id === Number(item.productId)) : null;
+  const stock = product && TG.variantStock ? TG.variantStock(product, item.memory || item.mem, item.color || '') : null;
+  if (stock != null && quantity > stock) {
+    showToast('Phiên bản này chỉ còn ' + stock + ' sản phẩm.');
+    return null;
+  }
   if (found) found.qty = quantity;
   else list.push(Object.assign({}, item, { qty: quantity }));
   tgddSaveCart(list);
