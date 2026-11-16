@@ -153,9 +153,11 @@
      localStorage. Ghi đè lớp địa chỉ để lưu vào phiên hiện tại, đồng thời đẩy
      địa chỉ mặc định lên CSDL (Admin nhìn thấy trong trang Khách hàng). */
   window.tgddUserUpdate = function (fn) {
+    if (!TG.user) return fallback.userUpdate(fn);
     const user = window.tgddCurrentUser();
     if (!user) return false;
     fn(user);
+    try { localStorage.setItem('tgdd_api_user', JSON.stringify(user)); } catch (_) {}
     return true;
   };
 
