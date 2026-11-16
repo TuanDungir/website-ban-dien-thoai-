@@ -91,7 +91,11 @@
   /* checkout.js gọi tgddCreateOrder(...) với object cũ; ta chuyển sang API
      và trả về mã đơn để trang điều hướng như trước. */
   window.tgddCreateOrder = async function (legacyOrder) {
-    if (!ready() || !TG.user) return null;
+    if (!TG.user) return fallback.createOrder(legacyOrder);
+    if (!ready()) {
+      showToast('Vui lòng kết nối máy chủ để đặt hàng bằng tài khoản này.');
+      return null;
+    }
 
     /* Mỗi dòng giỏ hàng ứng với một biến thể (dung lượng + màu) cụ thể.
        Ưu tiên variantId đã lưu; nếu chưa có thì tra theo tên máy + dung lượng. */
