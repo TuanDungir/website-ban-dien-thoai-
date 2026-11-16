@@ -491,5 +491,3 @@ document.addEventListener('DOMContentLoaded', () => {
     location.href = 'index.html?q=' + encodeURIComponent(document.getElementById('searchInput').value);
   });
 });
-
-
