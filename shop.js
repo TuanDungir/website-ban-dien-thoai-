@@ -44,7 +44,9 @@ function tgddCartSetQty(lineId, qty) {
   const list = tgddCart();
   const item = list.find((x) => tgddCartLineId(x) === lineId);
   if (!item) return;
-  item.qty = Math.max(1, Math.min(99, qty));
+  const quantity = Number(qty);
+  if (!Number.isFinite(quantity)) return;
+  item.qty = Math.max(1, Math.min(99, Math.trunc(quantity)));
   tgddSaveCart(list);
 }
 
