@@ -230,7 +230,24 @@ function esc(s) {
 
 function setProfileTab(t) { profileSubTab = t; render(); }
 
-function saveProfile() {
+async function saveProfile() {
+  if (window.TG && TG.user) {
+    const name = document.getElementById('pfName').value.trim();
+    const email = document.getElementById('pfEmail').value.trim();
+    if (!name) return showToast('Họ tên không được để trống.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast('Email không hợp lệ.');
+    try {
+      const fresh = await TG.api('/me', { method: 'PUT', body: { fullName: name, email } });
+      TG.rememberUser(Object.assign({}, TG.user, fresh, {
+        birth: document.getElementById('pfBirth').value,
+        gender: document.querySelector('input[name="gender"]:checked')?.value || 'Anh'
+      }));
+      tgddRenderHeader();
+      render();
+      showToast('Đã cập nhật thông tin cá nhân.');
+    } catch (err) { showToast(err.message); }
+    return;
+  }
   const list = tgddUsers();
   const user = list.find(u => u.id === tgddCurrentUser().id);
   if (!user) return;
