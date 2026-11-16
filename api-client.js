@@ -548,6 +548,9 @@
     if (typeof window.renderOrderPage === 'function') {
       try { window.renderOrderPage(); } catch (_) {}
     }
+    if (typeof window.payInit === 'function') {
+      try { window.payInit(); } catch (_) {}
+    }
   });
 
   /* Admin chỉnh kho ở tab khác (bản offline localStorage) hoặc vừa đổi ngưỡng:
