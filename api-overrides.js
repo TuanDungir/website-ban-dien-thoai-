@@ -114,7 +114,11 @@
           if (v) variantId = v.id;
         }
       }
-      if (variantId) items.push({ variantId, quantity: qty });
+      if (!variantId) {
+        showToast('Không tìm thấy phiên bản của ' + l.name + '. Vui lòng chọn lại sản phẩm.');
+        return null;
+      }
+      items.push({ variantId, quantity: qty });
     }
 
     if (!items.length) {
