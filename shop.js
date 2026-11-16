@@ -25,8 +25,11 @@ function tgddCartAdd(item, qty) {
   const list = tgddCart();
   const id = tgddCartLineId(item);
   const found = list.find((x) => tgddCartLineId(x) === id);
-  if (found) found.qty += qty || 1;
-  else list.push(Object.assign({}, item, { qty: qty || 1 }));
+  const increment = Number(qty == null ? 1 : qty);
+  if (!Number.isInteger(increment) || increment < 1) return null;
+  const quantity = Math.min(99, (found ? found.qty : 0) + increment);
+  if (found) found.qty = quantity;
+  else list.push(Object.assign({}, item, { qty: quantity }));
   tgddSaveCart(list);
   return list;
 }
