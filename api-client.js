@@ -374,6 +374,7 @@
       rememberUser(me);
       TG.orders = orders.map(toLegacyOrder);
       TG.user.orders = TG.orders;
+      if (typeof window.tgddRenderHeader === 'function') window.tgddRenderHeader();
       connectSocket();
       TG.orderListeners.forEach((fn) => { try { fn(TG.orders); } catch (_) {} });
       return TG.user;
