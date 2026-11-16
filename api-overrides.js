@@ -167,6 +167,7 @@
   };
 
   window.tgddAddressSave = function (addr) {
+    if (!TG.user) return fallback.addressSave(addr);
     const user = window.tgddCurrentUser();
     if (!user) return null;
     const id = addr.id || ('ad' + Date.now() + Math.floor(Math.random() * 1000));
