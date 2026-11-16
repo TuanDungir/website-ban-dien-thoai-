@@ -418,6 +418,7 @@ async function coPlaceOrder() {
   if (!addr) { showToast('Vui lòng chọn địa chỉ nhận hàng.'); return; }
 
   const lines = coSelectedLines();
+  if (!lines.length) { showToast('Vui lòng chọn ít nhất một sản phẩm.'); return; }
   const brandOf = (line) => {
     const p = products.find(x => x.id === line.productId);
     return p ? p.brand : 'Apple';
