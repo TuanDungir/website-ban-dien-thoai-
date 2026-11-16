@@ -71,7 +71,7 @@
 
     const memoryPrices = {};
     const memoryOld = {};
-    const colorImages = {};
+    const colorImages = Object.assign({}, specs.colorImages || {});
     const variantMap = {};
 
     /* Duyệt theo thứ tự biến thể từ API (đã sắp theo sort_order) để
