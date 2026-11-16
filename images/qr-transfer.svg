@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280">
+  <rect width="280" height="280" rx="16" fill="#fff"/>
+  <g fill="none" stroke="#111827" stroke-width="8">
+    <rect x="28" y="28" width="48" height="48"/><rect x="204" y="28" width="48" height="48"/>
+    <rect x="28" y="174" width="48" height="48"/>
+    <path d="M112 30h40v40h-24v32h48v36h-40v36h40v44h-32m-42-92H66v26m138-48h44v36h-24v42h24v38m-142-32v38"/>
+  </g>
+  <rect x="10" y="110" width="260" height="54" fill="#fff"/>
+  <text x="140" y="142" text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="18" fill="#111827">MINH HỌA DEMO</text>
+  <text x="140" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#6b7280">Không dùng để chuyển tiền</text>
+</svg>
