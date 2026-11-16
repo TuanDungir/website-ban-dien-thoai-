@@ -1,0 +1,328 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chi tiết sản phẩm | thegioidienthoai</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-promo">SIÊU ƯU ĐÃI ĐIỆN THOẠI — THU CŨ ĐỔI MỚI, TIẾT KIỆM ĐẾN HÀNG TRIỆU ĐỒNG</div>
+<header>
+ <div class="head">
+  <a class="logo" href="index.html" aria-label="thegioidienthoai.com">
+   <svg class="logo-mark" viewBox="0 0 100 100" role="img" aria-hidden="true">
+    <circle cx="50" cy="50" r="48" fill="#111"/>
+    <g fill="#ffd400">
+     <circle cx="34" cy="24" r="7"/>
+     <rect x="56" y="20" width="12" height="12" rx="1.5" transform="rotate(45 62 26)"/>
+     <rect x="24" y="40" width="14" height="14" rx="2"/>
+     <rect x="42" y="40" width="14" height="14" rx="2"/>
+     <rect x="60" y="40" width="14" height="14" rx="2"/>
+     <rect x="33" y="58" width="14" height="14" rx="2"/>
+     <rect x="51" y="58" width="14" height="14" rx="2"/>
+     <rect x="42" y="76" width="14" height="14" rx="2"/>
+    </g>
+   </svg>
+   <span class="logo-text">thegioidienthoai<span class="logo-tld">.com</span></span>
+  </a>
+  <form class="search" id="searchForm"><span>⌕</span>&nbsp;<input id="searchInput" placeholder="Bạn tìm điện thoại nào?" aria-label="Tìm kiếm sản phẩm"></form>
+  <button class="headbtn" id="authBtn" onclick="showToast('Trang chi tiết demo — đăng nhập nằm ở trang chủ.')">♙ Đăng nhập</button>
+  <button class="headbtn" onclick="showToast('Voucher mẫu: WELCOME50 — áp dụng khi thanh toán.')">🎟 Voucher</button>
+  <button class="headbtn" onclick="location.href='checkout.html?step=cart'">🛒 Giỏ hàng <span data-cart-count>(0)</span></button>
+  <span class="location">⌖ Hà Nội ▾</span>
+ </div>
+ <nav class="nav"><a href="index.html#products">Điện thoại</a><a href="index.html#brands">Hãng điện thoại</a><a href="index.html#tradein">Thu cũ, đổi mới</a><a href="index.html#promotions">Khuyến mãi</a><a href="index.html#products">Điện thoại bán chạy</a><a href="index.html#footer">Hỗ trợ</a></nav>
+</header>
+
+<main>
+ <div class="crumb" id="crumb">Trang chủ › Điện thoại di động › <span id="crumbName">Sản phẩm</span></div>
+ <div class="pd-wrap">
+  <div>
+   <div class="gallery-main" id="galleryMain"></div>
+   <div class="thumbs" id="thumbs"></div>
+  </div>
+
+  <div class="pd-info">
+   <span class="pd-brand" id="pdBrand"></span>
+   <h1 id="pdName"></h1>
+   <div class="rating" id="pdRating"></div>
+
+   <div class="label">Dung lượng</div>
+   <div class="opt" id="memOpts"></div>
+
+   <div class="label">Màu sắc</div>
+   <div class="opt" id="colorOpts"></div>
+
+   <div class="pd-selected" id="pdSelected"></div>
+   <div id="pdStock"></div>
+   <div class="pd-price" id="pdPrice"></div>
+   <div class="pd-old" id="pdOld"></div>
+
+   <div class="pd-actions">
+    <button class="cta ghost" onclick="addToCart()">＋ Thêm vào giỏ hàng</button>
+    <button class="cta" onclick="buyNow()">Mua ngay</button>
+   </div>
+
+   <div class="pd-policy">
+    <div>✔ Hàng chính hãng</div><div>↺ Đổi trả 30 ngày</div>
+    <div>🚚 Giao nhanh 2 giờ</div><div>🛡 Bảo hành 12 tháng</div>
+   </div>
+  </div>
+ </div>
+
+ <div class="pd-tabs">
+  <button class="active" data-tab="intro">Giới thiệu</button>
+  <button data-tab="specs">Thông số kỹ thuật</button>
+  <button data-tab="review">Đánh giá</button>
+ </div>
+ <div class="pd-section" id="pdSection"></div>
+</main>
+
+<footer id="footer"><div><h3>Tổng đài hỗ trợ</h3><p>Mua hàng: 1900 0000</p><p>Hỗ trợ kỹ thuật: 1900 0001</p></div><div><h3>Về chúng tôi</h3><p>Giới thiệu thegioidienthoai</p><p>Chính sách bảo hành</p><p>Chính sách đổi trả</p></div><div><h3>Thông tin khác</h3><p>Hướng dẫn mua hàng</p><p>Hướng dẫn thanh toán</p><p>Điều khoản sử dụng</p></div><div><h3>Cam kết</h3><p>Thông tin sản phẩm minh họa cho đồ án.</p><p>Giá và ưu đãi là dữ liệu demo, không phải báo giá bán thực tế.</p></div></footer>
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="auth.js"></script>
+<script src="shop.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="api-client.js"></script>
+<script src="api-overrides.js"></script>
+<script src="product-info.js"></script>
+<script src="reviews.js"></script>
+<script>
+const params=new URLSearchParams(location.search);
+let product=getProduct(params.get('id'));
+let selectedMem=null, selectedColor=null, slot=0;
+/* Thông số kỹ thuật tra theo ID sản phẩm. Khai báo ở đây (trước hàm vẽ)
+   để tránh lỗi truy cập biến trước khi khởi tạo. */
+let info=null;
+
+/* Dựng lại toàn bộ trang theo sản phẩm hiện có.
+   Gọi lại được sau khi api-client.js nạp xong dữ liệu từ CSDL, vì lần dựng
+   đầu tiên có thể còn dùng dữ liệu tĩnh của data.js. */
+function renderProductPage(){
+ const keepMem=selectedMem, keepColor=selectedColor, keepSlot=slot;
+ product=getProduct(params.get('id'));
+ slot=0;
+
+ if(!product){
+  document.getElementById('pdName').textContent='Không tìm thấy sản phẩm';
+  document.getElementById('pdSection').textContent='Sản phẩm không tồn tại. Hãy quay lại trang chủ.';
+  document.getElementById('memOpts').innerHTML='';
+  document.getElementById('colorOpts').innerHTML='';
+  const sb=document.getElementById('pdStock'); if(sb) sb.innerHTML='';
+  return;
+ }
+
+ /* Giữ lại lựa chọn của khách khi admin đổi kho realtime (không reset về mặc định) */
+ selectedMem=(keepMem&&product.memory.includes(keepMem))?keepMem:product.memory[0];
+ const availColors=product.colors||[product.color];
+ selectedColor=(keepColor&&availColors.includes(keepColor))?keepColor:(product.colors?product.colors[0]:(product.color||null));
+ if(typeof keepSlot==='number'&&keepSlot>=0) slot=keepSlot;
+ document.title=product.name+' | thegioidienthoai';
+ document.getElementById('crumbName').textContent=product.name;
+ document.getElementById('pdBrand').textContent=product.brand;
+ document.getElementById('pdName').textContent=product.name;
+ try{
+  if(typeof reviewStats==='function'){
+   const st=reviewStats(product);
+   document.getElementById('pdRating').innerHTML=st&&st.total?`<strong>★ ${st.avg}</strong> · ${st.total} đánh giá · Đã bán ${product.sold} · 🎁 ${product.gift}`:`<strong>★ ${product.rating}</strong> · Đã bán ${product.sold} · 🎁 ${product.gift}`;
+  }else document.getElementById('pdRating').innerHTML=`<strong>★ ${product.rating}</strong> · Đã bán ${product.sold} · 🎁 ${product.gift}`;
+ }catch(e){document.getElementById('pdRating').innerHTML=`<strong>★ ${product.rating}</strong> · Đã bán ${product.sold} · 🎁 ${product.gift}`;}
+ renderOptions();
+ renderGallery();
+ /* Tính lại thông số theo đúng sản phẩm đang mở (tra theo TÊN để không lệch ID backend). */
+ info=(typeof getProductInfo==='function'&&product)?getProductInfo(product):((typeof productInfo!=='undefined'&&product)?productInfo[product.id]:null);
+ if(typeof renderSection==='function'&&typeof sectionContent!=='undefined')renderSection('intro');
+}
+(window.TG=window.TG||{}).reloadProductPage=renderProductPage;
+
+/* Lần vẽ đầu tiên đặt ở CUỐI file để mọi khai báo bên dưới đã sẵn sàng.
+   (Trước đây gọi ngay tại đây nên renderSection chạm vào sectionContent
+   chưa được khởi tạo -> lỗi ReferenceError.) */
+
+function images(){return product?productImages(product,selectedColor):[]}
+
+function renderOptions(){
+ if(!product)return;
+ const hasStockApi=(window.TG&&TG.variantStock);
+ const th=(window.TG&&TG.thresholdOf)?TG.thresholdOf(product):undefined;
+ document.getElementById('memOpts').innerHTML=product.memory.map(m=>{
+  let qty=hasStockApi?(selectedColor?TG.variantStock(product,m,selectedColor):TG.memoryStock(product,m)):null;
+  let st=hasStockApi?TG.stockState(qty,th):null;
+  let tag=st?(st.key==='out'?' · Hết hàng':st.key==='low'?' · Còn '+qty+' máy':''):'';
+  return `<button class="${m===selectedMem?'active':''}${st?' stock-'+st.key:''}" onclick="pickMem('${m}')">${memoryLabel(product,m)}${tag}</button>`;
+ }).join('');
+ const colors=product.colors||[product.color];
+ document.getElementById('colorOpts').innerHTML=colors.map(c=>{
+  let qty=hasStockApi?TG.variantStock(product,selectedMem,c):null;
+  let st=hasStockApi?TG.stockState(qty,th):null;
+  let tag=st?(st.key==='out'?' · Hết hàng':st.key==='low'?' · Còn '+qty:''):'';
+  return `<button class="${c===selectedColor?'active':''}${st?' stock-'+st.key:''}" onclick="pickColor('${c}')"><span class="c-swatch" style="background:${swatchColors[c]||'#ccc'}"></span>${c}${tag}</button>`;
+ }).join('');
+ document.getElementById('pdSelected').innerHTML=`Đã chọn: <b>${product.name}</b> · ${memoryLabel(product,selectedMem)}${selectedColor?' · '+selectedColor:''}`;
+ const price=priceFor(product,selectedMem);
+ document.getElementById('pdPrice').textContent=money(price);
+ const listed=oldPriceFor(product,selectedMem);
+ const old=listed>price?listed:Math.round(price*1.12/10000)*10000;
+ document.getElementById('pdOld').textContent=money(old)+' · -'+Math.round((old-price)/old*100)+'%';
+ /* Tồn kho đúng theo admin cho đúng phiên bản đang chọn (vẫn cho bấm chọn khi hết hàng) */
+ const stockBox=document.getElementById('pdStock');
+ if(stockBox){
+  if(hasStockApi){
+   const qty=TG.variantStock(product,selectedMem,selectedColor);
+   const st=TG.stockState(qty,th);
+   stockBox.innerHTML=st?`<div class="stock-badge ${st.key}">${TG.stockText(qty,th)}</div>`:'';
+  }else stockBox.innerHTML='';
+ }
+}
+
+function renderGallery(){
+ const imgs=images();
+ if(slot>imgs.length-1)slot=0;
+ const cur=imgs[slot];
+ document.getElementById('galleryMain').innerHTML=
+  (cur?`<img src="${cur}" alt="${product.name}">`:'<span>Ảnh sẽ được cập nhật</span>')+
+  (imgs.length>1?`<button class="nav-arrow prev" onclick="stepImage(-1)" aria-label="Ảnh trước">‹</button>
+   <button class="nav-arrow next" onclick="stepImage(1)" aria-label="Ảnh sau">›</button>
+   <span class="img-counter">${slot+1}/${imgs.length}</span>`:'');
+ document.getElementById('thumbs').innerHTML=imgs.map((s,i)=>
+  `<div class="thumb ${i===slot?'active':''}" onclick="selectSlot(${i})"><img src="${s}" alt="Ảnh ${i+1}"></div>`).join('');
+}
+
+function selectSlot(i){slot=i;renderGallery()}
+function stepImage(dir){const n=images().length;if(!n)return;slot=(slot+dir+n)%n;renderGallery()}
+function pickMem(m){selectedMem=m;renderOptions()}
+function pickColor(c){selectedColor=c;slot=0;renderGallery();renderOptions()}
+
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowLeft')stepImage(-1);
+ if(e.key==='ArrowRight')stepImage(1);
+});
+
+/* Thông số kỹ thuật tra theo ID sản phẩm. Phải tính lại mỗi lần vẽ trang vì
+   ID đúng chỉ có sau khi api-client.js nạp xong danh mục từ CSDL. */
+
+const sectionContent={
+ intro:renderIntro,
+ specs:renderSpecs,
+ review:renderReview
+};
+let reviewFilter=0, reviewFormStars=5;
+
+function starRow(n){let s='';for(let i=1;i<=5;i++)s+=i<=n?'★':'☆';return `<span class="rv-stars">${s}</span>`}
+
+function renderReview(){
+ if(!product)return '<div>Không tìm thấy sản phẩm.</div>';
+ const st=(typeof reviewStats==='function')?reviewStats(product):{total:0,counts:{5:0,4:0,3:0,2:0,1:0},avg:product.rating||5};
+ const all=(typeof getReviews==='function')?getReviews(product):[];
+ const list=reviewFilter?all.filter(r=>Number(r.stars)===reviewFilter):all;
+ const pct=c=>st.total?Math.round(c/st.total*100):0;
+ const bars=[5,4,3,2,1].map(s=>`<button class="rv-bar-row ${reviewFilter===s?'active':''}" onclick="setReviewFilter(${s})"><span>${s}★</span><span class="rv-bar"><i style="width:${pct(st.counts[s]||0)}%"></i></span><span class="rv-cnt">${st.counts[s]||0}</span></button>`).join('');
+ const items=list.length?list.map(r=>{
+  const liked=(typeof hasLikedReview==='function')&&hasLikedReview(r.id);
+  const likeN=(r.likes||0)+((liked&&!r.seed)?0:(liked?1:0));
+  return `<div class="rv-item"><div class="rv-head"><b>${r.name}</b><span class="rv-date">${r.date}</span></div><div>${starRow(r.stars)}</div><p class="rv-text">${r.content}</p><button class="rv-like ${liked?'liked':''}" onclick="likeReviewUI('${r.id}',this)">👍 Hữu ích${likeN?` (${likeN})`:''}</button></div>`;
+ }).join(''):'<p class="rv-empty">Chưa có đánh giá nào cho mức sao này. Hãy là người đầu tiên nhận xét!</p>';
+ return `<div class="rv-wrap"><h3 class="info-title">Đánh giá ${product.name}</h3>
+  <div class="rv-summary"><div class="rv-score"><b>${st.avg}</b><div>${starRow(Math.round(st.avg))}</div><span>${st.total} đánh giá</span></div>
+  <div class="rv-bars">${bars}${reviewFilter?`<button class="rv-clear" onclick="setReviewFilter(0)">Xóa lọc ✕</button>`:''}</div></div>
+  <div class="rv-form"><h4>Viết đánh giá của bạn</h4><div class="rv-input-stars" id="rvStars">${[1,2,3,4,5].map(i=>`<span data-s="${i}" class="${i<=reviewFormStars?'on':''}" onclick="setFormStars(${i})">★</span>`).join('')}</div>
+  <div class="rv-grid"><input id="rvName" placeholder="Tên của bạn (vd: Minh Anh)"><textarea id="rvContent" placeholder="Chia sẻ trải nghiệm: pin, camera, màn hình, giao hàng..."></textarea>
+  <button class="cta" onclick="submitReviewUI()">Gửi đánh giá</button><p class="rv-note">Đánh giá được lưu trên trình duyệt này (demo localStorage) để nộp đồ án.</p></div></div>
+  <div class="rv-list">${items}</div></div>`;
+}
+function setReviewFilter(s){reviewFilter=(reviewFilter===s)?0:s;renderSection('review')}
+function setFormStars(s){reviewFormStars=s;document.querySelectorAll('#rvStars span').forEach(el=>el.classList.toggle('on',Number(el.dataset.s)<=s))}
+function submitReviewUI(){
+ if(!product)return;
+ const name=document.getElementById('rvName').value.trim()||'Khách';
+ const content=document.getElementById('rvContent').value.trim();
+ if(content.length<4)return showToast('Vui lòng nhập nội dung đánh giá (tối thiểu vài từ).');
+ addUserReview(product,name,reviewFormStars,content);
+ document.getElementById('rvContent').value='';
+ renderSection('review');
+ document.getElementById('pdRating').innerHTML=`<strong>★ ${reviewStats(product).avg}</strong> · ${reviewStats(product).total} đánh giá · 🎁 ${product.gift}`;
+ showToast('Đã gửi đánh giá. Cảm ơn bạn!');
+}
+function likeReviewUI(rid,btn){
+ if(typeof likeReview!=='function')return;
+ if(likeReview(product,rid)){renderSection('review');}
+ else showToast('Bạn đã thấy đánh giá này hữu ích rồi.');
+}
+
+function renderIntro(){
+ if(!info||!info.intro)return '<div><h3 style="margin:0 0 8px;color:#202124">Giới thiệu '+ (product?product.name:'') +'</h3><p style="max-width:640px">Nội dung giới thiệu sản phẩm sẽ được cập nhật tại đây.</p></div>';
+ return `<div class="info-block"><h3 class="info-title">${info.intro.heading}</h3><ul class="feature-list">${info.intro.bullets.map(b=>`<li>${b}</li>`).join('')}</ul></div>`;
+}
+
+function renderSpecs(){
+ if(!info||!info.specs)return '<div><h3 style="margin:0 0 8px;color:#202124">Thông số kỹ thuật</h3><p>Thông số chi tiết sẽ được cập nhật tại đây.</p></div>';
+ const rows=rows=>rows.map(([k,v])=>{
+  const val=Array.isArray(v)?`<ul class="spec-list">${v.map(x=>`<li>${x}</li>`).join('')}</ul>`:v;
+  return `<tr><th scope="row">${k}:</th><td>${val}</td></tr>`;
+ }).join('');
+ return `<div class="spec-wrap">${info.specs.map((g,i)=>
+  `<details class="spec-group" ${i===0?'open':''}><summary>${g.group}</summary><table class="spec-table">${rows(g.rows)}</table></details>`).join('')}</div>`;
+}
+
+function renderSection(tab){
+ document.querySelectorAll('.pd-tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+ const sec=document.getElementById('pdSection');
+ sec.classList.toggle('rich',tab!=='review'&&!!info);
+ sec.innerHTML=sectionContent[tab]();
+}
+document.querySelectorAll('.pd-tabs button').forEach(b=>b.addEventListener('click',()=>renderSection(b.dataset.tab)));
+
+/* Vẽ trang lần đầu — đặt ở đây vì mọi khai báo phía trên đã sẵn sàng. */
+renderProductPage();
+
+function addToCart(){
+ if(!product)return;
+ if(window.TG&&TG.variantStock){
+  const qty=TG.variantStock(product,selectedMem,selectedColor);
+  if(qty!=null&&qty<=0){showToast('Phiên bản này đã hết hàng. Vui lòng chọn màu hoặc dung lượng khác.');return;}
+ }
+ const v=(window.TG&&TG.findVariant)?TG.findVariant(product.id,selectedMem,selectedColor):null;
+ tgddCartAdd({
+  productId:product.id,
+  variantId:v?v.id:null,
+  name:product.name,
+  mem:memoryLabel(product,selectedMem),
+  memory:selectedMem,
+  color:selectedColor||'',
+  price:priceFor(product,selectedMem)
+ },1);
+ showToast(`Đã thêm ${product.name} ${memoryLabel(product,selectedMem)}${selectedColor?' '+selectedColor:''} vào giỏ hàng.`);
+ tgddRenderCartCount();
+}
+/* Mua ngay: thêm vào giỏ rồi đi thẳng tới bước chọn địa chỉ nhận hàng */
+function buyNow(){
+ if(!product)return;
+ if(window.TG&&TG.variantStock){
+  const qty=TG.variantStock(product,selectedMem,selectedColor);
+  if(qty!=null&&qty<=0){showToast('Phiên bản này đã hết hàng. Vui lòng chọn màu hoặc dung lượng khác.');return;}
+ }
+ if(!tgddCurrentUser()){
+  showToast('Vui lòng đăng nhập để đặt hàng.');
+  setTimeout(()=>{location.href='index.html?login=1'},900);
+  return;
+ }
+ const v=(window.TG&&TG.findVariant)?TG.findVariant(product.id,selectedMem,selectedColor):null;
+ tgddCartAdd({
+  productId:product.id,
+  variantId:v?v.id:null,
+  name:product.name,
+  mem:memoryLabel(product,selectedMem),
+  memory:selectedMem,
+  color:selectedColor||'',
+  price:priceFor(product,selectedMem)
+ },1);
+ location.href='checkout.html?step=address';
+}
+document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();location.href='index.html?q='+encodeURIComponent(document.getElementById('searchInput').value)});
+document.addEventListener('DOMContentLoaded',()=>{tgddRenderHeader();tgddRenderCartCount()});
+</script>
+</body>
+</html>
