@@ -15,7 +15,8 @@ function payInit() {
       '<a class="btn-block" style="display:inline-block;max-width:240px;text-align:center" href="index.html">Về trang chủ</a></div>';
     return;
   }
-  if (payOrder.status !== 'Chờ thanh toán') {
+  const awaitingApiPayment = payOrder.statusKey === 'pending' && payOrder.payMethod !== 'cod';
+  if (payOrder.status !== 'Chờ thanh toán' && !awaitingApiPayment) {
     location.replace('order.html?code=' + encodeURIComponent(payOrder.id));
     return;
   }
