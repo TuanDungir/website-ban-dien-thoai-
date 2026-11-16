@@ -198,6 +198,7 @@
   };
 
   window.tgddAddressDelete = function (id) {
+    if (!TG.user) return fallback.addressDelete(id);
     const user = window.tgddCurrentUser();
     if (!user) return;
     const wasDefault = (user.addresses || []).some((a) => a.id === id && a.default);
