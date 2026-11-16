@@ -78,11 +78,12 @@
 
   /* ------------------------------ Phiên đăng nhập ------------------------------ */
   window.tgddCurrentUser = function () {
-    return (window.TG && TG.user) ? TG.user : null;
+    return (window.TG && TG.user) ? TG.user : fallback.currentUser();
   };
 
   window.tgddLogout = function () {
     if (window.TG) TG.logout();
+    fallback.logout();
     tgddRenderHeader();
   };
 
