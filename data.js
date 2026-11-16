@@ -123,3 +123,24 @@ function productImages(p,color){
  return list;
 }
 
+/* The supplied source bundles do not include product photos or brand logos. */
+if (typeof document !== 'undefined') {
+ const fallbackImage = (img) => {
+  if (!img || img.tagName !== 'IMG' || img.dataset.fallbackApplied) return;
+  img.dataset.fallbackApplied = '1';
+  if ((img.getAttribute('src') || '').includes('images/brands/')) {
+   const label = document.createElement('span');
+   label.textContent = img.alt || img.closest('[data-brand]')?.dataset.brand || '';
+   img.replaceWith(label);
+  } else if (!(img.getAttribute('src') || '').includes('qr-transfer')) {
+   img.src = 'images/product-placeholder.svg';
+  }
+ };
+ document.addEventListener('error', event => fallbackImage(event.target), true);
+ document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('img').forEach(img => {
+   if (img.complete && img.naturalWidth === 0) fallbackImage(img);
+  });
+ });
+}
+
