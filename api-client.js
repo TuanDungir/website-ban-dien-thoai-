@@ -127,7 +127,7 @@
       img: p.image || 'images/ip17-den-1.jpg',
       stock: p.stock,
       specs,
-      featured: p.id
+      featured: specs.featured ?? p.id
     };
   }
   TG.toLegacyProduct = toLegacyProduct;
