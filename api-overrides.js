@@ -139,6 +139,8 @@
         payment: legacyOrder.payMethod || 'cod',
         note: legacyOrder.note || ''
       });
+      TG.orders = TG.orders || [];
+      TG.orders.unshift(TG.toLegacyOrder(order));
       return order.code;
     } catch (e) {
       showToast(e.message);
