@@ -285,7 +285,7 @@ function addToCart(){
   if(qty!=null&&qty<=0){showToast('Phiên bản này đã hết hàng. Vui lòng chọn màu hoặc dung lượng khác.');return;}
  }
  const v=(window.TG&&TG.findVariant)?TG.findVariant(product.id,selectedMem,selectedColor):null;
- tgddCartAdd({
+ const added=tgddCartAdd({
   productId:product.id,
   variantId:v?v.id:null,
   name:product.name,
@@ -294,6 +294,7 @@ function addToCart(){
   color:selectedColor||'',
   price:priceFor(product,selectedMem)
  },1);
+ if(!added)return;
  showToast(`Đã thêm ${product.name} ${memoryLabel(product,selectedMem)}${selectedColor?' '+selectedColor:''} vào giỏ hàng.`);
  tgddRenderCartCount();
 }
