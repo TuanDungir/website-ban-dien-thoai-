@@ -12,7 +12,15 @@
   /* Giữ tham chiếu hàm cũ để dự phòng khi offline */
   const fallback = {
     login: window.tgddLoginSubmit,
-    register: window.tgddRegister
+    register: window.tgddRegister,
+    currentUser: window.tgddCurrentUser,
+    logout: window.tgddLogout,
+    createOrder: window.tgddCreateOrder,
+    userUpdate: window.tgddUserUpdate,
+    addressSave: window.tgddAddressSave,
+    addressDelete: window.tgddAddressDelete,
+    getOrder: window.tgddGetOrder,
+    updateOrder: window.tgddUpdateOrder
   };
 
   const ready = () => window.TG && TG.online;
