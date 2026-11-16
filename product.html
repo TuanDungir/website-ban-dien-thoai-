@@ -311,7 +311,7 @@ function buyNow(){
   return;
  }
  const v=(window.TG&&TG.findVariant)?TG.findVariant(product.id,selectedMem,selectedColor):null;
- tgddCartAdd({
+ const added=tgddCartAdd({
   productId:product.id,
   variantId:v?v.id:null,
   name:product.name,
@@ -320,6 +320,7 @@ function buyNow(){
   color:selectedColor||'',
   price:priceFor(product,selectedMem)
  },1);
+ if(!added)return;
  location.href='checkout.html?step=address';
 }
 document.getElementById('searchForm').addEventListener('submit',e=>{e.preventDefault();location.href='index.html?q='+encodeURIComponent(document.getElementById('searchInput').value)});
