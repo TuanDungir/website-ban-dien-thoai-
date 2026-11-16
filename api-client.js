@@ -505,6 +505,7 @@
       })),
       /* Thông tin giao hàng đã chốt khi đặt */
       payMethod: o.paymentMethod || 'cod',
+      payAmount: o.paymentMethod === 'deposit' ? Math.round(o.totalAmount / 2) : o.totalAmount,
       address: (o.shippingAddress || o.receiverName)
         ? {
             name: o.receiverName,
