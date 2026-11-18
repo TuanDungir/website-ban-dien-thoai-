@@ -16,7 +16,7 @@ npm.cmd start
 
 Chạy kiểm tra tại thư mục `server` bằng `npm.cmd test`.
 
-Các trang tài khoản, chi tiết, giỏ hàng, đơn hàng và thanh toán hiện được đặt ở thư mục gốc để khớp đường dẫn của website. Thư mục `Bố Hải_Auth` và `shopping-cart` được giữ lại làm bản nguồn tham khảo; sửa chức năng đang dùng tại các file gốc.
+Các trang tài khoản, chi tiết, giỏ hàng, đơn hàng và thanh toán hiện được đặt ở thư mục gốc để khớp đường dẫn của website. Thư mục `Hải_Auth` và `shopping-cart` được giữ lại làm bản nguồn tham khảo; sửa chức năng đang dùng tại các file gốc.
 
 Xem [kết quả đối chiếu và giới hạn](INTEGRATION.md). Thanh toán và OTP vẫn là chức năng demo. Các ZIP không chứa ảnh sản phẩm gốc; website dùng ảnh chờ khi ảnh bị thiếu.
 
@@ -147,7 +147,7 @@ Một số tệp và thư mục hiện có trong repository:
 
 ```text
 website-ban-dien-thoai-/
-├── Bố Hải_Auth/        # Module xác thực tài khoản
+├── Hải_Auth/        # Module xác thực tài khoản
 ├── server/             # Khu vực mã nguồn phía server
 ├── shopping-cart/      # Module giỏ hàng
 ├── index.html          # Giao diện trang chủ
