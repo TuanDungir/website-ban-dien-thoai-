@@ -12,12 +12,6 @@ npm.cmd run seed
 npm.cmd start
 ```
 
-- Website: http://localhost:4000/index.html
-- Quản trị kết nối backend: http://localhost:4000/admin-pro.html
-- Admin backend: `ADMIN01` / `Admin@123456`.
-- Khách hàng demo: `an@example.com` / `123456`.
-- `admin-login.html` và `admin.html` là bản quản trị demo dùng localStorage, có thông tin đăng nhập riêng ngay trên trang.
-
 `npm.cmd run seed` tạo tài khoản mẫu và nhập 13 sản phẩm cùng các biến thể từ `data.js`. Chạy lại không ghi đè giá hoặc tồn kho đã chỉnh. SQLite nằm tại `server/data/thegioidienthoai.db`.
 
 Chạy kiểm tra tại thư mục `server` bằng `npm.cmd test`.
